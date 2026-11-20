@@ -80,9 +80,9 @@ const fetchMemeApiPosts = async (subreddit) => {
   }));
 };
 
-const fetchWeeklyPosts = async (subreddit, userAgent) => {
+const fetchDailyPosts = async (subreddit, userAgent) => {
   const endpoint = new URL(`https://www.reddit.com/r/${subreddit}/top.json`);
-  endpoint.searchParams.set('t', 'week');
+  endpoint.searchParams.set('t', 'day');
   endpoint.searchParams.set('limit', '100');
   try {
     const response = await fetch(endpoint, {
@@ -112,7 +112,7 @@ export const runRedditMemeIngestion = async () => {
 
   for (const subreddit of configuredSubreddits()) {
     try {
-      const posts = await fetchWeeklyPosts(subreddit, userAgent);
+      const posts = await fetchDailyPosts(subreddit, userAgent);
       for (const post of posts) {
         const postId = post ? getPostId(post) : '';
         const imageUrl = post ? getImageUrl(post) : '';
@@ -168,7 +168,7 @@ const refreshRedditQueue = async ({ onlyIfEmpty = false } = {}) => {
         source: 'reddit',
         status: { $ne: 'rejected' },
         isNsfw: { $ne: true },
-        lastSeenAt: { $gte: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000) },
+        lastSeenAt: { $gte: new Date(Date.now() - 24 * 60 * 60 * 1000) },
       });
       if (recentMeme) return;
     }
@@ -182,8 +182,9 @@ const refreshRedditQueue = async ({ onlyIfEmpty = false } = {}) => {
 
 export const startRedditMemeIngestion = () => {
   void refreshRedditQueue({ onlyIfEmpty: true });
+  const refreshSchedule = process.env.REDDIT_REFRESH_CRON || '0 3 * * *';
   return cron.schedule(
-    '0 3 * * 1',
+    refreshSchedule,
     () => refreshRedditQueue(),
     { timezone: 'UTC' },
   );

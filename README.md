@@ -41,6 +41,7 @@ CLOUD_API_SECRET=your_cloudinary_api_secret
 MEME_ADMIN_EMAILS=admin@example.com
 REDDIT_USER_AGENT=BattleMeetMemeQueue/1.0 (contact: admin@example.com)
 REDDIT_MEME_SUBREDDITS=wholesomememes,ProgrammerHumor,IndianDankMemes
+REDDIT_REFRESH_CRON=0 3 * * *
 
 
 ### Backend Setup
@@ -51,7 +52,7 @@ npm run dev
 ```
 
 The backend runs at `http://localhost:5000`.
-Reddit ingestion seeds the queue when the backend starts if the database has no recent safe Reddit memes, then refreshes every Monday at 03:00 UTC. If Reddit returns 403, ingestion falls back to subreddit samples from meme-api.com. Admins can also refresh the queue from `/admin/memes` or run `npm run ingest:reddit-memes`. Reddit images remain external links until an admin confirms permission to republish them. Upload only memes that you own or are licensed to use.
+Reddit ingestion fetches each configured subreddit’s top posts for the day, seeds the queue when the backend starts if safe Reddit memes are older than 24 hours, and refreshes every day at 03:00 UTC by default. Set `REDDIT_REFRESH_CRON` to change the schedule. If Reddit returns 403, ingestion falls back to subreddit samples from meme-api.com. Admins can also refresh the queue from `/admin/memes` or run `npm run ingest:reddit-memes`. Reddit images remain external links until an admin confirms permission to republish them. Upload only memes that you own or are licensed to use.
 `MEME_ADMIN_EMAILS` is only needed for meme review and Cloudinary publishing; it is not required to view categorized Reddit links in Discover.
 
 ### Frontend Setup
