@@ -1,4 +1,4 @@
-# Meet Cute (MERN Stack)
+# BattleMeet (MERN Stack)
 
 ## Tech Stack
 - React (Frontend)
@@ -39,7 +39,7 @@ CLOUD_NAME=your_cloudinary_cloud_name
 CLOUD_API_KEY=your_cloudinary_api_key
 CLOUD_API_SECRET=your_cloudinary_api_secret
 MEME_ADMIN_EMAILS=admin@example.com
-REDDIT_USER_AGENT=MeetCuteMemeQueue/1.0 (contact: admin@example.com)
+REDDIT_USER_AGENT=BattleMeetMemeQueue/1.0 (contact: admin@example.com)
 REDDIT_MEME_SUBREDDITS=wholesomememes,ProgrammerHumor,IndianDankMemes
 
 

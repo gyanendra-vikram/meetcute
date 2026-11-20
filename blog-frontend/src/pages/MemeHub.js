@@ -80,7 +80,7 @@ export default function MemeHub() {
   };
 
   const shareDna = async () => {
-    const text = `My Humor DNA is ${dna.topStyle || 'still a mystery'} — ${dna.totalApplause} applause on Meet Cute.`;
+    const text = `My Humor DNA is ${dna.topStyle || 'still a mystery'} — ${dna.totalApplause} applause on BattleMeet.`;
     try {
       if (navigator.share) {
         await navigator.share({ title: 'My Humor DNA', text });

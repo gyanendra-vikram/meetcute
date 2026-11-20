@@ -61,7 +61,7 @@ const configuredSubreddits = () => {
 
 const fetchMemeApiPosts = async (subreddit) => {
   const response = await fetch(`https://meme-api.com/gimme/${subreddit}/25`, {
-    headers: { 'User-Agent': process.env.REDDIT_USER_AGENT || 'MeetCuteMemeQueue/1.0' },
+    headers: { 'User-Agent': process.env.REDDIT_USER_AGENT || 'BattleMeetMemeQueue/1.0' },
     signal: AbortSignal.timeout(15000),
   });
   if (!response.ok) throw new Error(`Meme API returned ${response.status}`);
@@ -108,7 +108,7 @@ export const runRedditMemeIngestion = async () => {
   let inserted = 0;
   let skipped = 0;
   const failed = [];
-  const userAgent = process.env.REDDIT_USER_AGENT || 'MeetCuteMemeQueue/1.0';
+  const userAgent = process.env.REDDIT_USER_AGENT || 'BattleMeetMemeQueue/1.0';
 
   for (const subreddit of configuredSubreddits()) {
     try {

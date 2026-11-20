@@ -1,7 +1,7 @@
 {
-  "short_name": "BlogsMind",
-  "name": "BlogsMind",
-  "description": "A modern blogging platform to share your thoughts and ideas with the world.",
+  "short_name": "BattleMeet",
+  "name": "BattleMeet",
+  "description": "Meet matches through memes and battles.",
   "icons": [
     {
       "src": "logo2.png",

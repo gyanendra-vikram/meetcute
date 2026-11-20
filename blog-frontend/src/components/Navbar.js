@@ -33,9 +33,9 @@ export default function Navbar({ onLogout }) {
   return (
     <nav className="topbar">
       <div className="topbar-inner">
-        <Link className="brand" to="/discover" aria-label="Meet Cute home">
+        <Link className="brand" to="/discover" aria-label="BattleMeet home">
           <span className="brand-mark" aria-hidden="true">♡</span>
-          <span>meet<span className="brand-accent">cute</span></span>
+          <span>battle<span className="brand-accent">meet</span></span>
         </Link>
         <div className="nav-links">
           <NavLink className={linkClass} to="/discover">Discover</NavLink>
