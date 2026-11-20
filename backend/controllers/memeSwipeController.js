@@ -13,6 +13,32 @@ const parseMemeId = (memeId) => {
     : { cardId: memeId, cycle: 0 };
 };
 
+const hashString = (value) => {
+  let hash = 2166136261;
+  for (let index = 0; index < value.length; index += 1) {
+    hash ^= value.charCodeAt(index);
+    hash = Math.imul(hash, 16777619);
+  }
+  return hash >>> 0;
+};
+
+const shuffleForCycle = (cards, userId, cycle) => {
+  let seed = hashString(`${userId.toString()}:${cycle}`);
+  const random = () => {
+    seed += 0x6D2B79F5;
+    let value = seed;
+    value = Math.imul(value ^ (value >>> 15), value | 1);
+    value ^= value + Math.imul(value ^ (value >>> 7), value | 61);
+    return ((value ^ (value >>> 14)) >>> 0) / 4294967296;
+  };
+  const shuffled = [...cards];
+  for (let index = shuffled.length - 1; index > 0; index -= 1) {
+    const swapIndex = Math.floor(random() * (index + 1));
+    [shuffled[index], shuffled[swapIndex]] = [shuffled[swapIndex], shuffled[index]];
+  }
+  return shuffled;
+};
+
 const isAdult = (birthDate) => {
   if (!birthDate) return false;
   const date = new Date(birthDate);
@@ -84,8 +110,7 @@ const getSwipeProgress = async (userId) => {
       .map((swipe) => ({ ...parseMemeId(swipe.memeId), swipe }))
       .filter((entry) => entry.cycle === activeCycle)
       .map((entry) => entry.cardId));
-    const offset = (activeCycle * 7) % deck.length;
-    const cycleDeck = [...deck.slice(offset), ...deck.slice(0, offset)];
+    const cycleDeck = shuffleForCycle(deck, userId, activeCycle);
     return {
       swipedIds,
       nextCard: cycleDeck.find((meme) => !swipedIds.has(meme.id)) || null,
