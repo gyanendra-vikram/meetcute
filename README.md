@@ -56,7 +56,7 @@ Reddit ingestion seeds the queue when the backend starts if the database has no 
 
 ### Frontend Setup
 ```bash
-cd blog-frontend
+cd frontend
 npm install
 npm start
 ```
