@@ -17,34 +17,32 @@ export default function ForgotPassword() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-blue-50 px-4">
-      <div className="w-full max-w-md bg-white p-8 rounded-xl shadow-xl">
-        <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">
-          Forgot Password
-        </h2>
-        <form onSubmit={handleSubmit} className="space-y-4">
+    <main className="auth-page">
+      <section className="auth-card">
+        <Link className="auth-brand" to="/login"><span aria-hidden="true">♡</span>battle<span>meet</span></Link>
+        <h1>Forgot password?</h1>
+        <p className="auth-intro">Enter your email and we’ll send you a link to reset your password.</p>
+        <form onSubmit={handleSubmit} className="auth-form">
+          <label htmlFor="forgot-email">Email</label>
           <input
+            id="forgot-email"
             type="email"
             name="email"
-            placeholder="Enter your email"
+            placeholder="you@example.com"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            autoComplete="email"
+            className="auth-input"
           />
-          <button
-            type="submit"
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg transition duration-200"
-          >
-            Send Reset Link
+          <button type="submit" className="button button-primary auth-submit">
+            Send reset link
           </button>
-          <p className="text-sm text-center mt-2">
-          <Link to="/login" className="text-blue-600 hover:underline">
-            Back to Login
-          </Link>
-        </p>
         </form>
-      </div>
-    </div>
+        <p className="auth-footer">
+          Remembered your password? <Link to="/login">Sign in</Link>
+        </p>
+      </section>
+    </main>
   );
 }

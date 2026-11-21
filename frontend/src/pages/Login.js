@@ -34,7 +34,7 @@ export default function Login({ onLogin }) {
   return (
     <main className="auth-page">
       <section className="auth-card">
-        <Link className="auth-brand" to="/login"><span aria-hidden="true">♡</span> meet<span>cute</span></Link>
+        <Link className="auth-brand" to="/login"><span aria-hidden="true">♡</span>battle<span>meet</span></Link>
         <h1>Welcome back</h1>
         <p className="auth-intro">Sign in to find your next connection.</p>
         <form onSubmit={handleSubmit} className="auth-form">

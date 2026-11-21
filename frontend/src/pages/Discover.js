@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import API from '../utils/api';
+import { notifyMatch } from '../utils/matchNotifications';
 
 const fallbackPhotos = [
   'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1000&q=85',
@@ -75,7 +76,7 @@ export default function Discover() {
         targetUserId: profile._id,
         action,
       });
-      if (data.matched) toast.success(`It's a match with ${profile.name}! Your meme battle is waiting in Battles.`);
+      if (data.matched) notifyMatch({ _id: data.matchId, profile: data.profile });
       setLoading(true);
       await loadProfiles();
     } catch (error) {
@@ -121,7 +122,7 @@ export default function Discover() {
           <p className="eyebrow">YOUR NEXT CHAPTER</p>
           <h1>{needsMemeSwipes ? <>Find your <span>humor.</span></> : <>Meet someone <span>real.</span></>}</h1>
           <p className="muted">{needsMemeSwipes
-            ? 'Swipe five meme cards to unlock a profile suggestion. If someone likes you first, you can respond sooner.'
+            ? 'Swipe memes to unlock a profile suggestion. If someone likes you first, you can respond sooner.'
             : 'Thoughtful connections start with a hello.'}</p>
         </div>
         <div className="discover-links">
@@ -205,9 +206,6 @@ export default function Discover() {
             </button>
             <span>That’s me</span>
           </div>
-          <p className="meme-deck-note">
-            Meme cards and Reddit picks · {memeFeed.swipesRemaining} more until your suggestion · {memeFeed.cardsRemaining} until refresh
-          </p>
         </section>
       ) : profile ? (
         <section className="discovery-layout">

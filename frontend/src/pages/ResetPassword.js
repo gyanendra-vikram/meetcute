@@ -32,14 +32,16 @@ export default function ResetPassword() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-white to-blue-100 px-4">
-      <div className="w-full max-w-md bg-white p-8 rounded-xl shadow-xl">
-        <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">
-          Reset Password
-        </h2>
+    <main className="auth-page">
+      <section className="auth-card">
+        <Link className="auth-brand" to="/login"><span aria-hidden="true">♡</span>battle<span>meet</span></Link>
+        <h1>Reset your password</h1>
+        <p className="auth-intro">Choose a new password for your account.</p>
         {token ? (
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form onSubmit={handleSubmit} className="auth-form">
+            <label htmlFor="new-password">New password</label>
             <input
+              id="new-password"
               type="password"
               name="newPassword"
               placeholder="New password"
@@ -47,9 +49,11 @@ export default function ResetPassword() {
               onChange={(event) => setNewPassword(event.target.value)}
               required
               autoComplete="new-password"
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="auth-input"
             />
+            <label htmlFor="confirm-password">Confirm new password</label>
             <input
+              id="confirm-password"
               type="password"
               name="confirmPassword"
               placeholder="Confirm new password"
@@ -57,27 +61,23 @@ export default function ResetPassword() {
               onChange={(event) => setConfirmPassword(event.target.value)}
               required
               autoComplete="new-password"
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="auth-input"
             />
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              className="w-full bg-blue-600 hover:bg-blue-700 disabled:opacity-60 text-white py-2 rounded-lg transition duration-200"
-            >
-              {isSubmitting ? 'Resetting...' : 'Reset Password'}
+            <button type="submit" disabled={isSubmitting} className="button button-primary auth-submit">
+              {isSubmitting ? 'Resetting…' : 'Reset password'}
             </button>
           </form>
         ) : (
-          <p className="text-center text-gray-700">
+          <p className="auth-intro">
             This reset link is missing its token. Request a new one below.
           </p>
         )}
-        <p className="text-sm text-center mt-4">
-          <Link to="/reset" className="text-blue-600 hover:underline">
+        <p className="auth-footer">
+          <Link to="/reset">
             Request a new reset link
           </Link>
         </p>
-      </div>
-    </div>
+      </section>
+    </main>
   );
 }

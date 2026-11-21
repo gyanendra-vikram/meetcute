@@ -27,31 +27,29 @@ export default function VerifyEmail() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-white to-blue-100 px-4">
-      <div className="w-full max-w-md bg-white p-8 rounded-xl shadow-xl text-center">
-        <h2 className="text-2xl font-bold mb-4 text-gray-800">Verify your email</h2>
-        {status === 'idle' && (
-          <p className="mb-6 text-gray-700">
-            Click below to verify your email address and activate your account.
-          </p>
-        )}
-        {message && <p className="mb-6 text-gray-700">{message}</p>}
-        {status === 'idle' && (
+    <main className="auth-page">
+      <section className="auth-card">
+        <Link className="auth-brand" to="/login"><span aria-hidden="true">♡</span>battle<span>meet</span></Link>
+        <h1>Verify your email</h1>
+        <p className={`auth-intro${status === 'error' ? ' auth-message-error' : status === 'success' ? ' auth-message-success' : ''}`}>
+          {message || (status === 'loading'
+            ? 'Verifying your email…'
+            : 'Click below to verify your email address and activate your account.')}
+        </p>
+        {(status === 'idle' || status === 'loading') && (
           <button
             type="button"
             onClick={handleVerify}
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg transition duration-200"
+            disabled={status === 'loading'}
+            className="button button-primary auth-submit"
           >
-            Verify Email
+            {status === 'loading' ? 'Verifying…' : 'Verify email'}
           </button>
         )}
-        {status === 'loading' && <p className="mb-6 text-gray-700">Verifying email...</p>}
         {(status === 'success' || status === 'error') && (
-          <Link to="/login" className="text-blue-600 hover:underline">
-            Go to login
-          </Link>
+          <p className="auth-footer"><Link to="/login">Go to sign in</Link></p>
         )}
-      </div>
-    </div>
+      </section>
+    </main>
   );
 }

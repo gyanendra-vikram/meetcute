@@ -61,6 +61,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .nav-links, .nav-account { display: flex; align-items: center; gap: 26px; }
 .nav-link { color: #756a71; font-size: 14px; font-weight: 600; text-decoration: none; transition: color .2s; }
 .nav-link:hover, .nav-link-active { color: var(--rose-dark); }
+.nav-notification-badge { display: inline-flex; min-width: 18px; height: 18px; align-items: center; justify-content: center; margin-left: 6px; padding: 0 5px; border-radius: 999px; background: var(--rose-dark); color: #fff; font-size: 11px; font-weight: 700; line-height: 1; }
 .nav-account { gap: 17px; }
 .nav-greeting { color: #685e64; font-size: 14px; }
 .logout-button { border: 0; background: transparent; color: var(--rose-dark); cursor: pointer; font-size: 13px; font-weight: 700; }
@@ -338,6 +339,8 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .auth-footer { margin: 18px 0 0; color: var(--muted); font-size: 12px; text-align: center; }
 .auth-footer a { color: var(--rose-dark); font-weight: 700; text-decoration: none; }
 .auth-footer a:hover { text-decoration: underline; }
+.auth-message-success { color: #39745e; }
+.auth-message-error { color: var(--rose-dark); }
 
 .meme-deck-image { z-index: 1; width: 100%; height: 100%; object-fit: contain; }
 .community-admin-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 16px; }

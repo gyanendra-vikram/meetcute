@@ -36,7 +36,7 @@ export default function Signup() {
   return (
     <main className="auth-page">
       <section className="auth-card">
-        <Link className="auth-brand" to="/signup"><span aria-hidden="true">♡</span> meet<span>cute</span></Link>
+        <Link className="auth-brand" to="/signup"><span aria-hidden="true">♡</span> battle<span>meet</span></Link>
         <h1>Make room for a connection</h1>
         <p className="auth-intro">Create an account to meet people who feel like your kind of person.</p>
         <form onSubmit={handleSubmit} className="auth-form">
